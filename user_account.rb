@@ -1,5 +1,3 @@
-require './bank'
-
 class User
 	attr_accessor :name, :account_number, :account_balance
 
