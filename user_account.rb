@@ -9,23 +9,23 @@ class User
 
 	def withdraw(bank)
 		puts "Hi #{name}, your account balance is RM#{account_balance}"
-		puts "Please enter the amount you want to withdraw:"
-		amount_withdraw = gets.chomp.to_f
+	  puts "Please enter the amount you want to withdraw:"
+	  amount_withdraw = gets.chomp.to_f
 
-		if amount_withdraw <= 0
-			puts "Invalid amount."
-			return
-		elsif amount_withdraw > @account_balance
-			puts "You have insufficient balance."
-			return
-		else
-			@account_balance -= amount_withdraw
-			puts "You have withdraw RM#{amount_withdraw} succesfully."
-			puts "Your balance: RM#{@account_balance}"
-		end
+	  if amount_withdraw <= 0
+	    puts "Invalid amount."
+	    return
+	  elsif amount_withdraw > @account_balance
+	    puts "You have insufficient balance."
+	    return
+	  else
+	    @account_balance -= amount_withdraw
+	    puts "You have withdraw RM#{amount_withdraw} succesfully."
+	    puts "Your balance: RM#{@account_balance}"
+	  end
 
-		bank.update_account(self, @account_balance)
-		Transaction.record_transaction(Transaction.new(self, 'Withdraw', nil, amount_withdraw))
+	  bank.update_account(@account_number, @account_balance)
+	  Transaction.record_transaction(Transaction.new(self, 'Withdraw', nil, amount_withdraw))
 	end
 
 	def deposit(bank)
@@ -42,7 +42,7 @@ class User
 			puts "Your balance: RM#{@account_balance}"
 		end
 
-		bank.update_account(self, @account_balance)
+		bank.update_account(@account_number, @account_balance)
 		Transaction.record_transaction(Transaction.new(self, 'Deposit', nil, amount_deposit))
 	end
 
@@ -83,12 +83,6 @@ class User
 					puts "You have have sent RM#{amount_transfer} succesfully."
 					puts "Your balance: RM#{@account_balance}"
 			 end
-
-			bank.update_account(self, recipient_number, @account_balance)
-			bank.update_recipient_account(@account_number, recipient_number, recipient.account_balance)
-			
-			Transaction.record_transaction(Transaction.new(self, 'Transfer Sent', recipient, amount_transfer))
-    	Transaction.record_transaction(Transaction.new(recipient, 'Transfer Received', self, amount_transfer))
 
 		when "N"
 		  exit
