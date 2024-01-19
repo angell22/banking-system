@@ -49,4 +49,9 @@ class Bank
   	user_account = @accounts.find { |account| account.account_number == user.account_number }
     user_account.account_balance = updated_balance
   end
+
+  def update_recepient_account(recipient_number, updated_balance)
+  	recipient_account = @accounts.find { |account| account.account_number == recipient_number }
+    recipient_account.account_balance = updated_balance
+  end
 end

@@ -72,11 +72,14 @@ class User
 				return
 		 else
 				@account_balance -= amount_transfer
+				recipient.account_balance += amount_transfer
+
 				puts "You have have sent RM#{amount_transfer} succesfully."
 				puts "Your balance: RM#{@account_balance}"
 		 end
 
 		bank.update_account(self, @account_balance)
+		bank.update_recepient_account(recipient_number, recipient.account_balance)
 
     when "N"
       exit
