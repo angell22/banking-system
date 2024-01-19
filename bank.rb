@@ -50,8 +50,10 @@ class Bank
     user_account.account_balance = updated_balance
   end
 
-  def update_recepient_account(recipient_number, updated_balance)
-  	recipient_account = @accounts.find { |account| account.account_number == recipient_number }
-    recipient_account.account_balance = updated_balance
+   def display_menu
+    puts "\n1. Withdraw"
+    puts "2. Deposit"
+    puts "3. Check Balance"
+    puts "4. Exit"
   end
 end
